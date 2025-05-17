@@ -1,4 +1,4 @@
-# OpenWrt AgustinLorenzo/openwrt/main_nss_mesh Kernel 6.6 firmware for Redmi AX6 with NSS Driver
+# OpenWrt AgustinLorenzo/openwrt/main_nss_mesh Kernel 6 firmware for Redmi AX6 with NSS Driver
 
 Auto build Openwrt firmware for Redmi AX6 NSS via GitHub Actions
 
