@@ -93,9 +93,10 @@ jobs:
 
     - name: Copy Luci 
       run: |
-        cp -r $GITHUB_WORKSPACE/luci-app-argon-config /openwrt/feeds/luci/applications/
-        cp -r $GITHUB_WORKSPACE/luci-app-openvpn-server /openwrt/feeds/luci/applications/
-        cp -r $GITHUB_WORKSPACE/luci-theme-argon /openwrt/feeds/luci/themes/
+        cd openwrt
+        cp -r $GITHUB_WORKSPACE/luci-app-argon-config /feeds/luci/applications/
+        cp -r $GITHUB_WORKSPACE/luci-app-openvpn-server /feeds/luci/applications/
+        cp -r $GITHUB_WORKSPACE/luci-theme-argon /feeds/luci/themes/
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
