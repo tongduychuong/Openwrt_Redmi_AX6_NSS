@@ -49,9 +49,6 @@ jobs:
       env:
         DEBIAN_FRONTEND: noninteractive
       run: |
-        sudo apt update
-        sudo apt -y autoremove --purge
-        sudo apt -y clean
         sudo timedatectl set-timezone "$TZ"
         sudo mkdir -p /workdir
         sudo chown $USER:$GROUPS /workdir
@@ -73,7 +70,7 @@ jobs:
       run: |
         cd openwrt
         git clone $TMP_URL -b $TMP_BRANCH TMPAPP
-        cp -rf /TMPAPP/luci-app-argon-config /feeds/luci/themes/
+        cp -r TMPAPP/luci-theme-argon/ feeds/luci/themes/
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
