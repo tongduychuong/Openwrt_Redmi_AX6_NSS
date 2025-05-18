@@ -76,7 +76,13 @@ jobs:
         chmod +x $DIY_P1_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P1_SH
-   
+
+    - name: Copy Luci 
+      run: |
+        cp -r luci-app-argon-config /openwrt/feeds/luci/applications/
+        cp -r luci-app-openvpn-server /openwrt/feeds/luci/applications/
+        cp -r luci-theme-argon /openwrt/feeds/luci/themes/
+
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
