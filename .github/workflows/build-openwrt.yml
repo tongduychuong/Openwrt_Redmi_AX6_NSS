@@ -12,7 +12,9 @@ permissions:
   contents: write
 env:
   REPO_URL: https://github.com/AgustinLorenzo/openwrt
+  TMP_URL: https://github.com/tongduychuong/Openwrt_Redmi_AX6_NSS
   REPO_BRANCH: main_nss
+  TMP_BRANCH: Redmi_AX6_AgustinLorenzo_nss_mesh
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: open.config
   DIY_P1_SH: diy-part1.sh
@@ -70,26 +72,25 @@ jobs:
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         ln -sf /workdir/openwrt $GITHUB_WORKSPACE/openwrt
 
-    - name: Load custom feeds
-      run: |
-        [ -e $FEEDS_CONF ] && mv $FEEDS_CONF openwrt/feeds.conf.default
-        chmod +x $DIY_P1_SH
-        cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P1_SH
-   
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
 
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
-    - name: Load custom configuration
+    - name: Clone source tmp
       run: |
-        [ -e files ] && mv files openwrt/files
-        [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
-        chmod +x $DIY_P2_SH
         cd openwrt
-        $GITHUB_WORKSPACE/$DIY_P2_SH
+        git clone $TMP_URL -b $TMP_BRANCH TMPAPP
+        cp -r TMPAPP/luci-theme-argon/ feeds/luci/themes/
+        cp -r TMPAPP/luci-app-argon-config/ feeds/luci/applications/
+        cp -r TMPAPP/luci-app-openvpn-server/ feeds/luci/applications/
+
+    - name: Update feeds
+      run: cd openwrt && ./scripts/feeds update -a
+
+    - name: Install feeds
+      run: cd openwrt && ./scripts/feeds install -a
 
     - name: SSH connection to Actions
       uses: P3TERX/ssh2actions@v1.0.0
