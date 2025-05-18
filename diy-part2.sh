@@ -8,11 +8,6 @@
 # Blog: https://p3terx.com
 #============================================================
 
-# Copy luci application
-cp -rf /luci-app-argon-config /openwrt/feeds/luci/applications/
-cp -rf /luci-app-openvpn-server /openwrt/feeds/luci/applications/
-cp -rf /luci-theme-argon /openwrt/feeds/luci/themes/
-
 # Modify default IP
 #sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
 
