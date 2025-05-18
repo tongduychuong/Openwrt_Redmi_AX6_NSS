@@ -12,7 +12,9 @@ permissions:
   contents: write
 env:
   REPO_URL: https://github.com/AgustinLorenzo/openwrt
+  TMP_URL: https://github.com/tongduychuong/Openwrt_Redmi_AX6_NSS.git
   REPO_BRANCH: main_nss_mesh
+  TMP_BRANCH: Redmi_AX6_AgustinLorenzo_nss_mesh
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: open.config
   DIY_P1_SH: diy-part1.sh
@@ -83,6 +85,12 @@ jobs:
     - name: Install feeds
       run: cd openwrt && ./scripts/feeds install -a
 
+    - name: Clone source tmp
+      run: |
+        cd openwrt
+        git clone $TMP_URL -b $TMP_BRANCH TMPAPP
+        cp -rf /TMPAPP/luci-app-argon-config /feeds/luci/themes/
+    
     - name: Load custom configuration
       run: |
         [ -e files ] && mv files openwrt/files
@@ -90,13 +98,6 @@ jobs:
         chmod +x $DIY_P2_SH
         cd openwrt
         $GITHUB_WORKSPACE/$DIY_P2_SH
-
-    - name: Copy Luci 
-      run: |
-        cd openwrt
-        cp -r $GITHUB_WORKSPACE/luci-app-argon-config /feeds/luci/applications/
-        cp -r $GITHUB_WORKSPACE/luci-app-openvpn-server /feeds/luci/applications/
-        cp -r $GITHUB_WORKSPACE/luci-theme-argon /feeds/luci/themes/
 
     - name: Update feeds
       run: cd openwrt && ./scripts/feeds update -a
