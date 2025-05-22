@@ -11,6 +11,10 @@
 # Modify default IP
 #sed -i 's/192.168.1.1/10.0.0.1/g' package/base-files/files/bin/config_generate
 
+cp -r nss-setup/config-nss.seed .config
+
+sed -i 's/# CONFIG_TARGET_qualcommax_ipq807x_DEVICE_redmi_ax6 is not set/CONFIG_TARGET_qualcommax_ipq807x_DEVICE_redmi_ax6=y/' .config
+
 # Modify hostname
 #sed -i 's/OpenWrt/Newifi-D2/g' package/base-files/files/bin/config_generate
 
