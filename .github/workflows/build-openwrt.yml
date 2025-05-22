@@ -11,7 +11,7 @@ name: Build OpenWrt
 permissions:
   contents: write
 env:
-  REPO_URL: https://github.com/AgustinLorenzo/openwrt
+  REPO_URL: https://github.com/qosmio/openwrt-ipq
   TMP_URL: https://github.com/tongduychuong/Openwrt_Redmi_AX6_NSS
   REPO_BRANCH: main_nss
   TMP_BRANCH: Redmi_AX6_AgustinLorenzo_nss_mesh
