@@ -13,7 +13,7 @@ permissions:
 env:
   REPO_URL: https://github.com/qosmio/openwrt-ipq
   TMP_URL: https://github.com/tongduychuong/Openwrt_Redmi_AX6_NSS
-  REPO_BRANCH: main_nss
+  REPO_BRANCH: main-nss
   TMP_BRANCH: Redmi_AX6_AgustinLorenzo_nss_mesh
   FEEDS_CONF: feeds.conf.default
   CONFIG_FILE: open.config
